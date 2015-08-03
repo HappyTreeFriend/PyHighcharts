@@ -89,8 +89,9 @@ def format_value(value, depth=2):
         return FORMATTERS[value_type](value)
     else:
         if isinstance(value, basestring):
-            value = str(value)
-        return "%r" % value
+            value = value.decode('utf-8').encode('raw-unicode-escape')
+            return "\"%s\"" % value
+        return value
 
 
 def list_to_js(l, depth=2):
